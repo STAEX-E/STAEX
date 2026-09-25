@@ -153,6 +153,124 @@
   </div>
 </section>
 
+<!-- ============ UNIFIED ARCHITECTURE NETWORK ============ -->
+<section id="network">
+  <div class="container">
+    <div class="section-head reveal">
+      <p class="eyebrow">Unified Architecture</p>
+      <h2>One model. Five platforms, one core.</h2>
+      <p class="lead">Every airframe in the fleet is a spoke of the same design core — shared avionics, shared manufacturing discipline, and a single flight-test pipeline.</p>
+    </div>
+
+    <div class="panel network-card reveal">
+      <div class="network-visual">
+        <svg class="network-svg" viewBox="0 0 564 410" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <defs>
+            <linearGradient id="netgrad-1" gradientUnits="userSpaceOnUse" x1="270" y1="205" x2="110" y2="90">
+              <stop offset="0%" style="stop-color:var(--c-yellow)" stop-opacity="0"/>
+              <stop offset="50%" style="stop-color:var(--c-yellow)" stop-opacity="0.85"/>
+              <stop offset="100%" style="stop-color:var(--c-yellow)" stop-opacity="0"/>
+            </linearGradient>
+            <linearGradient id="netgrad-2" gradientUnits="userSpaceOnUse" x1="294" y1="205" x2="360" y2="70">
+              <stop offset="0%" style="stop-color:var(--c-orange)" stop-opacity="0"/>
+              <stop offset="50%" style="stop-color:var(--c-orange)" stop-opacity="0.85"/>
+              <stop offset="100%" style="stop-color:var(--c-orange)" stop-opacity="0"/>
+            </linearGradient>
+            <linearGradient id="netgrad-3" gradientUnits="userSpaceOnUse" x1="250" y1="205" x2="160" y2="205">
+              <stop offset="0%" style="stop-color:var(--c-yellow)" stop-opacity="0"/>
+              <stop offset="50%" style="stop-color:var(--c-yellow)" stop-opacity="0.85"/>
+              <stop offset="100%" style="stop-color:var(--c-yellow)" stop-opacity="0"/>
+            </linearGradient>
+            <linearGradient id="netgrad-4" gradientUnits="userSpaceOnUse" x1="314" y1="205" x2="480" y2="205">
+              <stop offset="0%" style="stop-color:var(--c-orange)" stop-opacity="0"/>
+              <stop offset="50%" style="stop-color:var(--c-orange)" stop-opacity="0.85"/>
+              <stop offset="100%" style="stop-color:var(--c-orange)" stop-opacity="0"/>
+            </linearGradient>
+            <linearGradient id="netgrad-5" gradientUnits="userSpaceOnUse" x1="282" y1="205" x2="282" y2="360">
+              <stop offset="0%" style="stop-color:var(--c-yellow)" stop-opacity="0"/>
+              <stop offset="50%" style="stop-color:var(--c-yellow)" stop-opacity="0.85"/>
+              <stop offset="100%" style="stop-color:var(--c-yellow)" stop-opacity="0"/>
+            </linearGradient>
+          </defs>
+
+          <path d="M 270 205 V 105 Q 270 90 255 90 H 110" stroke="var(--c-border)" stroke-width="1.5" fill="none"/>
+          <path d="M 294 205 V 85 Q 294 70 309 70 H 360" stroke="var(--c-border)" stroke-width="1.5" fill="none"/>
+          <path d="M 250 205 H 160" stroke="var(--c-border)" stroke-width="1.5" fill="none"/>
+          <path d="M 314 205 H 480" stroke="var(--c-border)" stroke-width="1.5" fill="none"/>
+          <path d="M 282 205 V 360" stroke="var(--c-border)" stroke-width="1.5" fill="none"/>
+
+          <path class="network-path-flow" d="M 270 205 V 105 Q 270 90 255 90 H 110" stroke="url(#netgrad-1)" style="animation-delay:0s"/>
+          <path class="network-path-flow" d="M 294 205 V 85 Q 294 70 309 70 H 360" stroke="url(#netgrad-2)" style="animation-delay:.6s"/>
+          <path class="network-path-flow" d="M 250 205 H 160" stroke="url(#netgrad-3)" style="animation-delay:1.2s"/>
+          <path class="network-path-flow" d="M 314 205 H 480" stroke="url(#netgrad-4)" style="animation-delay:1.8s"/>
+          <path class="network-path-flow" d="M 282 205 V 360" stroke="url(#netgrad-5)" style="animation-delay:2.4s"/>
+        </svg>
+
+        <div class="network-hub" aria-hidden="true"><span class="mark-lg"></span></div>
+
+        <!-- 10" Tactical Drone — top-left, x110 y90 -->
+        <div class="network-node" style="left:19.5%; top:21.95%;">
+          <div class="network-node__badge">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round">
+              <line x1="5" y1="5" x2="19" y2="19"/><line x1="19" y1="5" x2="5" y2="19"/>
+              <circle cx="5" cy="5" r="2.2"/><circle cx="19" cy="5" r="2.2"/><circle cx="5" cy="19" r="2.2"/><circle cx="19" cy="19" r="2.2"/>
+            </svg>
+          </div>
+          <span class="network-node__label">10&Prime; Tactical</span>
+        </div>
+
+        <!-- 7" FPV Interceptor — top-right, x360 y70 -->
+        <div class="network-node" style="left:63.83%; top:17.07%;">
+          <div class="network-node__badge" style="color:var(--c-orange)">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+              <circle cx="12" cy="12" r="7"/><circle cx="12" cy="12" r="1.8" fill="currentColor" stroke="none"/>
+              <line x1="12" y1="2" x2="12" y2="5"/><line x1="12" y1="19" x2="12" y2="22"/>
+              <line x1="2" y1="12" x2="5" y2="12"/><line x1="19" y1="12" x2="22" y2="12"/>
+            </svg>
+          </div>
+          <span class="network-node__label">7&Prime; Interceptor</span>
+        </div>
+
+        <!-- 5" FPV Interceptor — mid-left, x160 y205 -->
+        <div class="network-node" style="left:28.37%; top:50%;">
+          <div class="network-node__badge">
+            <svg viewBox="0 0 24 24" fill="currentColor" stroke="none">
+              <path d="M13 2 4 14h7l-1 8 9-12h-7z"/>
+            </svg>
+          </div>
+          <span class="network-node__label">5&Prime; Interceptor</span>
+        </div>
+
+        <!-- 15" Payload / Surveillance — mid-right, x480 y205 -->
+        <div class="network-node" style="left:85.1%; top:50%;">
+          <div class="network-node__badge" style="color:var(--c-orange)">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+              <path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7-10-7-10-7Z"/>
+              <circle cx="12" cy="12" r="3"/>
+            </svg>
+          </div>
+          <span class="network-node__label">15&Prime; Surveillance</span>
+        </div>
+
+        <!-- Tailsitter VTOL — bottom-center, x282 y360 -->
+        <div class="network-node" style="left:50%; top:87.8%;">
+          <div class="network-node__badge">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 2v14M12 2l-5 5M12 2l5 5"/><path d="M7 20h10"/>
+            </svg>
+          </div>
+          <span class="network-node__label">Tailsitter VTOL</span>
+        </div>
+      </div>
+
+      <div class="network-card__body">
+        <p>A single core architecture — flight controller, comms stack, and manufacturing process — feeds every airframe in the fleet, from the smallest interceptor to the long-endurance VTOL.</p>
+        <a class="text-link" href="products.html">Explore the Fleet <span class="arrow">→</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ============ CTA ============ -->
 <section id="cta">
   <div class="container">
