@@ -234,8 +234,19 @@
 
   function init() {
     const params = new URLSearchParams(window.location.search);
+    const restoreId = params.get("restore");
+    let restored = false;
+    if (restoreId && window.SentinelCart) {
+      const cart = window.SentinelCart.readCart();
+      const item = cart.find((i) => i.cartItemId === restoreId);
+      if (item && item.config) {
+        Object.assign(sel, item.config);
+        restored = true;
+      }
+    }
+
     const productId = params.get("product");
-    if (productId) {
+    if (!restored && productId) {
       const product = (window.SENTINEL_PRODUCTS || []).find((p) => p.id === productId);
       if (product) sel.platformId = defaultPlatformForProduct(product);
     }
