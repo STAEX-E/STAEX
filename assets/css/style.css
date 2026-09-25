@@ -1,5 +1,5 @@
 /* ============================================================
-   STAEX — Defense / Aerospace Business Model Showcase
+   Sentinel Dynamics — Defense / Aerospace Business Model Showcase
    Design tokens
    ============================================================ */
 :root {
@@ -112,20 +112,89 @@ img, svg { display: block; max-width: 100%; }
 .nav__brand {
   display: flex;
   align-items: center;
-  gap: .6rem;
-  font-weight: 800;
-  letter-spacing: .12em;
-  font-size: .92rem;
+  gap: .65rem;
   text-transform: uppercase;
 }
 
 .nav__brand .mark {
-  width: 10px;
-  height: 10px;
-  background: var(--c-yellow);
-  border-radius: 3px;
-  transform: rotate(45deg);
-  box-shadow: 0 0 14px rgba(244,197,24,.7);
+  flex-shrink: 0;
+  width: 14px;
+  height: 14px;
+  background: linear-gradient(135deg, var(--c-yellow), var(--c-orange));
+  clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+  box-shadow: 0 0 14px rgba(244,197,24,.65);
+  animation: markPulse 3.2s ease-in-out infinite;
+}
+
+@keyframes markPulse {
+  0%, 100% { box-shadow: 0 0 10px rgba(244,197,24,.5); }
+  50% { box-shadow: 0 0 20px rgba(255,122,26,.85); }
+}
+
+/* ============================================================
+   Brand wordmark — "SENTINEL DYNAMICS" lockup
+   ============================================================ */
+.brand-lockup {
+  display: inline-flex;
+  align-items: baseline;
+  gap: .48em;
+  line-height: 1;
+}
+
+.brand-word {
+  font-size: 1em;
+  font-weight: 800;
+  letter-spacing: .03em;
+  white-space: nowrap;
+  background: linear-gradient(100deg,
+    var(--c-yellow) 0%, var(--c-orange) 22%, #fff8e6 46%, var(--c-orange) 68%, var(--c-yellow) 100%);
+  background-size: 260% 100%;
+  background-position: 0% 50%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  filter: drop-shadow(0 0 8px rgba(244,197,24,.35));
+  animation: brandShimmer 7s ease-in-out infinite;
+}
+
+.brand-word--sub {
+  font-size: .42em;
+  font-weight: 600;
+  letter-spacing: .32em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: var(--c-gray-light);
+  background: none;
+  -webkit-background-clip: initial;
+  background-clip: initial;
+  filter: none;
+  animation: none;
+  align-self: flex-end;
+  padding-bottom: .3em;
+}
+
+@keyframes brandShimmer {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+.nav__brand .brand-lockup { font-size: 1.05rem; }
+
+.hero__brandmark {
+  margin-bottom: 1.6rem;
+}
+.hero__brandmark .brand-lockup {
+  font-size: clamp(1.7rem, 5vw, 3.1rem);
+}
+.hero__brandmark .brand-word {
+  filter: drop-shadow(0 0 12px rgba(244,197,24,.4));
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .brand-word,
+  .nav__brand .mark {
+    animation: none;
+  }
 }
 
 .nav__links {
@@ -1111,6 +1180,8 @@ footer nav a:hover { color: var(--c-yellow); }
     padding-left: 1.1rem;
     padding-right: 1.1rem;
   }
+  .nav__brand .brand-lockup { font-size: .88rem; }
+  .nav__brand .brand-word--sub { display: none; }
   .nav__links {
     gap: .85rem;
     font-size: .62rem;

@@ -1,5 +1,5 @@
 /* ============================================================
-   STAEX — Particle systems
+   Sentinel Dynamics — Particle systems
    1) Ambient background field (all pages)
    2) Hero aircraft-assembly field (home page only)
    Pure canvas 2D, no dependencies.
@@ -17,12 +17,64 @@
     if (!canvas) return;
     const ctx = canvas.getContext("2d");
     let w, h, dots = [];
+    let streaks = [];
+    let nextStreakAt = 0;
+
+    function maybeSpawnStreak(t) {
+      if (reduceMotion || t < nextStreakAt || streaks.length >= 2) return;
+      const dir = Math.random() < 0.5 ? 1 : -1;
+      const speed = (2.1 + Math.random() * 1.6) * DPR;
+      streaks.push({
+        x: dir > 0 ? -60 * DPR : w + 60 * DPR,
+        y: Math.random() * h * 0.65,
+        vx: dir * speed * (0.65 + Math.random() * 0.35),
+        vy: speed * (0.45 + Math.random() * 0.45),
+        len: (46 + Math.random() * 38) * DPR,
+        life: 0,
+        maxLife: 85 + Math.random() * 45,
+      });
+      nextStreakAt = t + 4500 + Math.random() * 6500;
+    }
+
+    function drawStreaks(t) {
+      maybeSpawnStreak(t);
+      for (let i = streaks.length - 1; i >= 0; i--) {
+        const s = streaks[i];
+        s.x += s.vx;
+        s.y += s.vy;
+        s.life++;
+        const lr = s.life / s.maxLife;
+        const alpha = lr < 0.18 ? lr / 0.18 : lr > 0.75 ? Math.max(0, (1 - lr) / 0.25) : 1;
+        if (s.life > s.maxLife || s.x < -100 * DPR || s.x > w + 100 * DPR || s.y > h + 100 * DPR) {
+          streaks.splice(i, 1);
+          continue;
+        }
+        const mag = Math.hypot(s.vx, s.vy) || 1;
+        const tailX = s.x - (s.vx / mag) * s.len;
+        const tailY = s.y - (s.vy / mag) * s.len;
+        const grad = ctx.createLinearGradient(tailX, tailY, s.x, s.y);
+        grad.addColorStop(0, "rgba(244,197,24,0)");
+        grad.addColorStop(1, `rgba(255,244,214,${0.7 * alpha})`);
+        ctx.strokeStyle = grad;
+        ctx.lineWidth = 1.1 * DPR;
+        ctx.lineCap = "round";
+        ctx.beginPath();
+        ctx.moveTo(tailX, tailY);
+        ctx.lineTo(s.x, s.y);
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.fillStyle = `rgba(255,250,235,${0.85 * alpha})`;
+        ctx.arc(s.x, s.y, 1 * DPR, 0, Math.PI * 2);
+        ctx.fill();
+      }
+    }
 
     function resize() {
       w = canvas.width = window.innerWidth * DPR;
       h = canvas.height = window.innerHeight * DPR;
       canvas.style.width = window.innerWidth + "px";
       canvas.style.height = window.innerHeight + "px";
+      streaks = [];
       const count = Math.round((window.innerWidth * window.innerHeight) / 22000);
       dots = Array.from({ length: count }, () => ({
         x: Math.random() * w,
@@ -58,6 +110,7 @@
         ctx.arc(d.x + mx * DPR, d.y + my * DPR, d.r, 0, Math.PI * 2);
         ctx.fill();
       }
+      drawStreaks(t);
       if (!reduceMotion) requestAnimationFrame(tick);
     }
 
