@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Business Model — STAEX</title>
+<meta name="description" content="From mission requirement to operational capability — how STAEX takes a defense customer from first requirement through tendering, procurement, delivery, training and lifetime support.">
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+<canvas id="bg-field" aria-hidden="true"></canvas>
+<div id="scroll-progress"></div>
+
+<div class="journey-tracker" id="journey-tracker" aria-hidden="true">
+  <span class="journey-tracker__num" id="journey-tracker-num">01</span>
+  <span class="journey-tracker__label" id="journey-tracker-label">Requirement</span>
+  <span class="journey-tracker__total">/ 08</span>
+</div>
+
+<nav class="nav">
+  <a href="index.html" class="nav__brand">
+    <span class="mark"></span>
+    STAEX
+  </a>
+  <div class="nav__links">
+    <a href="index.html">Home</a>
+    <a href="products.html">Products</a>
+    <a href="business-model.html" aria-current="page">Business Model</a>
+    <a href="about.html">About</a>
+  </div>
+</nav>
+
+<header class="page-header container">
+  <p class="eyebrow reveal">Business Model</p>
+  <h1 class="reveal">From Mission Requirement to Operational Capability.</h1>
+  <p class="lead reveal">STAEX supports the complete customer journey — from the first requirement conversation through tendering, procurement, delivery, and decades of in-service support. Here's how the relationship works, start to finish.</p>
+</header>
+
+<!-- ============ THE JOURNEY ============ -->
+<section id="journey-section">
+  <div class="container">
+    <div class="section-head reveal">
+      <p class="eyebrow">The Journey</p>
+      <h2>Eight stages. One continuous partnership.</h2>
+      <p class="lead">A STAEX platform doesn't end at delivery — every stage below is part of the same relationship, from concept to years of operational service.</p>
+    </div>
+
+    <div class="journey" id="journey-track">
+      <div class="journey__line"><div class="journey__line-fill" id="journey-fill"></div></div>
+
+      <!-- 01 -->
+      <div class="journey__step reveal" data-step="01" data-label="Requirement">
+        <div class="journey__badge">01</div>
+        <div class="journey__content">
+          <div class="icon-tile">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.35-4.35"/></svg>
+          </div>
+          <div class="journey__step-label">Step 01</div>
+          <h3>Requirement</h3>
+          <p>Every platform begins with a conversation, not a catalogue. We work directly with defense stakeholders to capture the operational requirement, threat environment, and mission profile before a single design decision is made.</p>
+        </div>
+      </div>
+
+      <!-- 02 -->
+      <div class="journey__step reveal" data-step="02" data-label="Engineering &amp; Development">
+        <div class="journey__badge">02</div>
+        <div class="journey__content">
+          <div class="icon-tile">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 2v14M12 2l4 4M12 2 8 6"/><path d="M5 14a7 7 0 0 0 14 0"/></svg>
+          </div>
+          <div class="journey__step-label">Step 02</div>
+          <h3>Engineering &amp; Development</h3>
+          <p>The requirement is translated into airframe, avionics and payload architecture through an in-house design and engineering pipeline — the same vertically-integrated process behind every platform in the STAEX fleet.</p>
+        </div>
+      </div>
+
+      <!-- 03 -->
+      <div class="journey__step reveal" data-step="03" data-label="Demonstration &amp; Evaluation">
+        <div class="journey__badge">03</div>
+        <div class="journey__content">
+          <div class="icon-tile">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>
+          </div>
+          <div class="journey__step-label">Step 03</div>
+          <h3>Demonstration &amp; Evaluation</h3>
+          <p>Prototypes are flight-tested and demonstrated under real mission conditions, giving evaluators direct, hands-on visibility into performance before any commitment is made.</p>
+        </div>
+      </div>
+
+      <!-- 04 -->
+      <div class="journey__step reveal" data-step="04" data-label="Tendering &amp; Bidding">
+        <div class="journey__badge">04</div>
+        <div class="journey__content">
+          <div class="icon-tile">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+          </div>
+          <div class="journey__step-label">Step 04</div>
+          <h3>Tendering &amp; Bidding</h3>
+          <p>We participate in government tenders and competitive bidding processes with complete technical and commercial documentation, structured for transparent, side-by-side evaluation.</p>
+        </div>
+      </div>
+
+      <!-- 05 -->
+      <div class="journey__step reveal" data-step="05" data-label="Procurement">
+        <div class="journey__badge">05</div>
+        <div class="journey__content">
+          <div class="icon-tile">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 2h6v3H9z"/><path d="M9 13l2 2 4-4"/></svg>
+          </div>
+          <div class="journey__step-label">Step 05</div>
+          <h3>Procurement</h3>
+          <p>From e-tendering portals to reverse auctions, we operate across the full range of applicable defense procurement processes to move a platform from proposal to signed contract.</p>
+        </div>
+      </div>
+
+      <!-- 06 -->
+      <div class="journey__step reveal" data-step="06" data-label="Production &amp; Delivery">
+        <div class="journey__badge">06</div>
+        <div class="journey__content">
+          <div class="icon-tile">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 7h11v9H3z"/><path d="M14 10h4l3 3v3h-7z"/><circle cx="7" cy="18" r="1.6"/><circle cx="17" cy="18" r="1.6"/></svg>
+          </div>
+          <div class="journey__step-label">Step 06</div>
+          <h3>Production &amp; Delivery</h3>
+          <p>Contracted platforms move into scalable, in-house production, with quality-controlled manufacturing and delivery scheduled directly against operational timelines.</p>
+        </div>
+      </div>
+
+      <!-- 07 -->
+      <div class="journey__step reveal" data-step="07" data-label="Training &amp; Deployment">
+        <div class="journey__badge">07</div>
+        <div class="journey__content">
+          <div class="icon-tile">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 3 2 8l10 5 10-5-10-5Z"/><path d="M6 11v5c0 1.5 2.7 3 6 3s6-1.5 6-3v-5"/></svg>
+          </div>
+          <div class="journey__step-label">Step 07</div>
+          <h3>Training &amp; Deployment</h3>
+          <p>Operator and maintainer training, commissioning, and on-site deployment support ensure platforms enter service mission-ready from day one.</p>
+        </div>
+      </div>
+
+      <!-- 08 -->
+      <div class="journey__step reveal" data-step="08" data-label="Lifetime Support">
+        <div class="journey__badge">08</div>
+        <div class="journey__content">
+          <div class="icon-tile">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 2 4 5v6c0 5 3.5 8.5 8 11 4.5-2.5 8-6 8-11V5l-8-3Z"/><path d="M9 12l2 2 4-4"/></svg>
+          </div>
+          <div class="journey__step-label">Step 08</div>
+          <h3>Lifetime Support</h3>
+          <p>The relationship continues long after delivery — warranty coverage, spare parts, maintenance, and continued technical upgrades across the platform's full operational life.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ DEFENCE PROCUREMENT ============ -->
+<section id="procurement">
+  <div class="container">
+    <div class="section-head reveal">
+      <p class="eyebrow">How We Engage</p>
+      <h2>Built to operate inside defense procurement.</h2>
+      <p class="lead">STAEX participates across the full spectrum of applicable procurement pathways, structured for transparency and compliance at every stage.</p>
+    </div>
+
+    <div class="grid grid-3 reveal-stagger">
+      <div class="panel">
+        <div class="icon-tile">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 2 2 8h20L12 2Z"/><path d="M4 8v12M20 8v12M9 8v12M15 8v12"/><path d="M2 20h20"/></svg>
+        </div>
+        <h4>Government Tenders</h4>
+        <p>Direct participation in national and defense-ministry tender processes, from RFP response to final submission.</p>
+      </div>
+      <div class="panel">
+        <div class="icon-tile">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 20h6M8 20V13"/><path d="m3 9 5-5 8 8-5 5-8-8Z"/><path d="m14 3 7 7"/></svg>
+        </div>
+        <h4>Competitive Bidding</h4>
+        <p>Structured, transparent bids benchmarked against clearly defined technical and commercial criteria.</p>
+      </div>
+      <div class="panel">
+        <div class="icon-tile">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="4" width="18" height="13" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+        </div>
+        <h4>E-Tendering</h4>
+        <p>Full compatibility with digital procurement portals and e-tendering platforms used across defense procurement bodies.</p>
+      </div>
+      <div class="panel">
+        <div class="icon-tile">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 2 2 7l10 5 10-5-10-5Z"/><path d="M2 12l10 5 10-5M2 17l10 5 10-5"/></svg>
+        </div>
+        <h4>Technical &amp; Commercial Bidding</h4>
+        <p>Dual-track proposals that separate rigorous technical evaluation from commercial and pricing structure.</p>
+      </div>
+      <div class="panel">
+        <div class="icon-tile">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 7l7 7 4-4 7 7"/><path d="M21 10v7h-7"/></svg>
+        </div>
+        <h4>Reverse Auctions</h4>
+        <p>Active participation in reverse-auction procurement formats where competitive pricing is negotiated in real time.</p>
+      </div>
+      <div class="panel">
+        <div class="icon-tile">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M9 6h11M9 12h11M9 18h11"/><path d="M4 6h.01M4 12h.01M4 18h.01"/></svg>
+        </div>
+        <h4>Applicable Procurement Processes</h4>
+        <p>Adaptable to the specific procurement framework of each defense body, region, or program.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ BUYER BENEFITS ============ -->
+<section id="benefits">
+  <div class="container">
+    <div class="section-head reveal">
+      <p class="eyebrow">What Buyers Get</p>
+      <h2>Support that outlasts the sale.</h2>
+      <p class="lead">Acquiring a STAEX platform is the start of a relationship, not the end of a transaction.</p>
+    </div>
+
+    <div class="grid grid-4 reveal-stagger">
+      <div class="panel">
+        <div class="icon-tile">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.35-4.35"/></svg>
+        </div>
+        <h4>Mission-Specific Solutions</h4>
+        <p>Platforms and payload configurations tailored to the buyer's specific operational requirement.</p>
+      </div>
+      <div class="panel">
+        <div class="icon-tile">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 3 2 8l10 5 10-5-10-5Z"/><path d="M6 11v5c0 1.5 2.7 3 6 3s6-1.5 6-3v-5"/></svg>
+        </div>
+        <h4>Training &amp; Commissioning</h4>
+        <p>Full operator and maintainer training plus on-site commissioning before handover.</p>
+      </div>
+      <div class="panel">
+        <div class="icon-tile">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 2 4 5v6c0 5 3.5 8.5 8 11 4.5-2.5 8-6 8-11V5l-8-3Z"/><path d="M9 12l2 2 4-4"/></svg>
+        </div>
+        <h4>Warranty</h4>
+        <p>Comprehensive warranty coverage backing every delivered platform.</p>
+      </div>
+      <div class="panel">
+        <div class="icon-tile">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3"/><path d="M12 3v6M12 15v6M3 12h6M15 12h6"/></svg>
+        </div>
+        <h4>Lifetime Service Support</h4>
+        <p>Ongoing service support for the full operational lifespan of the platform.</p>
+      </div>
+      <div class="panel">
+        <div class="icon-tile">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
+        </div>
+        <h4>24/7 Assistance</h4>
+        <p>Round-the-clock technical assistance for deployed operators.</p>
+      </div>
+      <div class="panel">
+        <div class="icon-tile">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4l-2.8 2.8-2-2 2.8-2.8Z"/></svg>
+        </div>
+        <h4>Maintenance &amp; Spare Parts</h4>
+        <p>Guaranteed access to maintenance services and genuine spare parts.</p>
+      </div>
+      <div class="panel">
+        <div class="icon-tile">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 17l6-6 4 4 8-8"/><path d="M15 7h6v6"/></svg>
+        </div>
+        <h4>Upgrades &amp; Continued Support</h4>
+        <p>Continued technical support and upgrade paths as mission requirements evolve.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ MISSION QUOTE ============ -->
+<section id="mission-quote">
+  <div class="container">
+    <div class="panel pull-quote reveal">
+      <p class="pull-quote__text">From mission requirement to operational capability — <span class="accent-text">Space Gen Aviation</span> supports the complete lifecycle.</p>
+    </div>
+  </div>
+</section>
+
+<section id="cta">
+  <div class="container">
+    <div class="cta-band reveal">
+      <div>
+        <p class="eyebrow">See It in Action</p>
+        <h2>Explore the platforms this model delivers.</h2>
+      </div>
+      <div class="cta-band__links">
+        <a class="text-link" href="products.html">View Products <span class="arrow">→</span></a>
+        <a class="text-link" href="about.html">About STAEX <span class="arrow">→</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="foot__brand">STAEX</div>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="products.html">Products</a>
+    <a href="business-model.html">Business Model</a>
+    <a href="about.html">About</a>
+  </nav>
+  <div class="foot__meta">A SpaceGen Aviation-inspired concept · Aerospace &amp; Defense</div>
+</footer>
+
+<script src="assets/js/particles.js"></script>
+<script src="assets/js/main.js"></script>
+</body>
+</html>
