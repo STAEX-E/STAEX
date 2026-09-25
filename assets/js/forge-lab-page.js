@@ -24,6 +24,19 @@
     return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">' + (PLATFORM_ICONS[key] || "") + "</svg>";
   }
 
+  const FPV_STYLE_ICONS = {
+    "true-x": '<line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/><circle cx="6" cy="6" r="1.7"/><circle cx="18" cy="6" r="1.7"/><circle cx="6" cy="18" r="1.7"/><circle cx="18" cy="18" r="1.7"/>',
+    "straight-x": '<line x1="5" y1="8" x2="19" y2="16"/><line x1="19" y1="8" x2="5" y2="16"/><circle cx="5" cy="8" r="1.7"/><circle cx="19" cy="8" r="1.7"/><circle cx="5" cy="16" r="1.7"/><circle cx="19" cy="16" r="1.7"/>',
+    deadcat: '<path d="M12 13 6 6M12 13l6-7M12 13 6 19M12 13l6 6"/><circle cx="6" cy="6" r="1.7"/><circle cx="18" cy="6" r="1.7"/><circle cx="6" cy="19" r="1.7"/><circle cx="18" cy="19" r="1.7"/>',
+    "stretch-x": '<line x1="9" y1="9" x2="17" y2="12"/><line x1="17" y1="12" x2="9" y2="15"/><line x1="9" y1="9" x2="4" y2="7"/><line x1="9" y1="15" x2="4" y2="17"/><circle cx="17" cy="12" r="1.5"/><circle cx="9" cy="9" r="1.5"/><circle cx="9" cy="15" r="1.5"/><circle cx="4" cy="7" r="1.2"/><circle cx="4" cy="17" r="1.2"/>',
+    "long-x": '<line x1="2" y1="2" x2="22" y2="22"/><line x1="22" y1="2" x2="2" y2="22"/><circle cx="2" cy="2" r="1.5"/><circle cx="22" cy="2" r="1.5"/><circle cx="2" cy="22" r="1.5"/><circle cx="22" cy="22" r="1.5"/>',
+    "h-frame": '<path d="M6 5v14M18 5v14M6 12h12"/><circle cx="6" cy="5" r="1.6"/><circle cx="18" cy="5" r="1.6"/><circle cx="6" cy="19" r="1.6"/><circle cx="18" cy="19" r="1.6"/>',
+    cinewhoop: '<circle cx="7" cy="7" r="3.1"/><circle cx="17" cy="7" r="3.1"/><circle cx="7" cy="17" r="3.1"/><circle cx="17" cy="17" r="3.1"/><circle cx="12" cy="12" r="2.2"/>',
+  };
+  function fpvStyleSvg(key) {
+    return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">' + (FPV_STYLE_ICONS[key] || "") + "</svg>";
+  }
+
   const PLATFORM_OVERRIDE = { "uas-15-surveillance": "hexacopter", "drone-atlas-cargo": "octacopter" };
   const CATEGORY_DEFAULT_PLATFORM = { vtol: "vtol", fpv: "fpv", drone: "hexacopter", uas: "fixed-wing", "counter-uas": "interceptor" };
 
@@ -35,6 +48,8 @@
   const sel = {
     platformId: null,
     frameId: null,
+    fpvStyleId: null,
+    fpvSizeIn: null,
     motorId: null,
     propId: null,
     escId: null,
@@ -46,6 +61,14 @@
     payloadId: F.PAYLOADS[0].id,
     protocol: F.COMMS_PROTOCOLS[0],
     receiverId: null,
+    powerModuleId: null,
+    becId: null,
+    currentSensorId: null,
+    antennaId: null,
+    landingGearId: F.LANDING_GEAR[0].id,
+    buzzerId: F.BUZZERS[0].id,
+    ledId: F.LED_KITS[0].id,
+    mountId: null,
   };
 
   function fillSelect(el, list, valueOf, labelOf, current) {
@@ -61,6 +84,10 @@
   const els = {
     platforms: document.getElementById("forge-platforms"),
     frame: document.getElementById("forge-frame"),
+    frameField: document.getElementById("forge-frame-field"),
+    fpvPicker: document.getElementById("forge-fpv-frame-picker"),
+    fpvStyles: document.getElementById("forge-fpv-styles"),
+    fpvSizes: document.getElementById("forge-fpv-sizes"),
     motor: document.getElementById("forge-motor"),
     prop: document.getElementById("forge-prop"),
     esc: document.getElementById("forge-esc"),
@@ -71,6 +98,14 @@
     camera: document.getElementById("forge-camera"),
     payload: document.getElementById("forge-payload"),
     payloadField: document.getElementById("forge-payload-field"),
+    powerModule: document.getElementById("forge-power"),
+    bec: document.getElementById("forge-bec"),
+    currentSensor: document.getElementById("forge-current-sensor"),
+    antenna: document.getElementById("forge-antenna"),
+    landingGear: document.getElementById("forge-landing-gear"),
+    buzzer: document.getElementById("forge-buzzer"),
+    led: document.getElementById("forge-led"),
+    mount: document.getElementById("forge-mount"),
     protocols: document.getElementById("forge-protocols"),
     receiver: document.getElementById("forge-receiver"),
     checks: document.getElementById("forge-checks"),
@@ -95,9 +130,59 @@
 
   function renderFrame() {
     const platform = F.byId(F.PLATFORMS, sel.platformId);
-    const frames = platform ? platform.frameIds.map((id) => F.byId(F.FRAMES, id)) : F.FRAMES;
-    sel.frameId = fillSelect(els.frame, frames, (f) => f.id, (f) => f.label, sel.frameId);
+    const isFpv = !!(platform && platform.hasFpvFramePicker);
+    els.frameField.style.display = isFpv ? "none" : "";
+    els.fpvPicker.style.display = isFpv ? "" : "none";
+
+    if (isFpv) {
+      if (!sel.fpvStyleId) sel.fpvStyleId = F.FPV_FRAME_STYLES[0].id;
+      if (!sel.fpvSizeIn) sel.fpvSizeIn = 5;
+      renderFpvStylePicker();
+      renderFpvSizePicker();
+      updateFpvFrameSelection();
+    } else {
+      const frames = platform ? platform.frameIds.map((id) => F.byId(F.FRAMES, id)) : F.FRAMES;
+      sel.frameId = fillSelect(els.frame, frames, (f) => f.id, (f) => f.label, sel.frameId);
+    }
     els.payloadField.style.display = platform && platform.hasPayload ? "" : "none";
+  }
+
+  function renderFpvStylePicker() {
+    els.fpvStyles.innerHTML = F.FPV_FRAME_STYLES.map(
+      (s) => `<div class="forge-option-card${s.id === sel.fpvStyleId ? " is-selected" : ""}" data-style="${s.id}" title="${window.escapeHtml(s.desc)}">${fpvStyleSvg(s.id)}<span>${s.label}</span></div>`
+    ).join("");
+    els.fpvStyles.querySelectorAll(".forge-option-card").forEach((card) => {
+      card.addEventListener("click", () => {
+        sel.fpvStyleId = card.dataset.style;
+        renderFpvStylePicker();
+        updateFpvFrameSelection();
+        recompute();
+      });
+    });
+  }
+
+  function renderFpvSizePicker() {
+    els.fpvSizes.innerHTML = F.FPV_FRAME_SIZES.map(
+      (size) => `<button type="button" class="forge-pill${size === sel.fpvSizeIn ? " is-selected" : ""}" data-size="${size}">${size}″</button>`
+    ).join("");
+    els.fpvSizes.querySelectorAll(".forge-pill").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        sel.fpvSizeIn = Number(btn.dataset.size);
+        renderFpvSizePicker();
+        updateFpvFrameSelection();
+        recompute();
+      });
+    });
+  }
+
+  function updateFpvFrameSelection() {
+    sel.frameId = F.fpvFrameId(sel.fpvStyleId, sel.fpvSizeIn);
+    const frame = F.byId(F.FRAMES, sel.frameId);
+    if (!frame) return;
+    document.getElementById("fpv-size").textContent = frame.sizeIn + "″";
+    document.getElementById("fpv-weight").textContent = "~" + frame.baseWeightG + " g";
+    document.getElementById("fpv-motors").textContent = frame.motorCount;
+    document.getElementById("fpv-prop").textContent = frame.maxPropIn + "″ or smaller";
   }
 
   function renderStaticLists() {
@@ -111,6 +196,14 @@
     sel.cameraId = fillSelect(els.camera, F.CAMERAS, (c) => c.id, (c) => c.label, sel.cameraId);
     sel.payloadId = fillSelect(els.payload, F.PAYLOADS, (p) => p.id, (p) => p.label, sel.payloadId);
     sel.receiverId = fillSelect(els.receiver, F.RECEIVERS, (r) => r.id, (r) => `${r.label} (${r.protocol})`, sel.receiverId);
+    sel.powerModuleId = fillSelect(els.powerModule, F.POWER_MODULES, (p) => p.id, (p) => p.label, sel.powerModuleId);
+    sel.becId = fillSelect(els.bec, F.BEC_MODULES, (b) => b.id, (b) => b.label, sel.becId);
+    sel.currentSensorId = fillSelect(els.currentSensor, F.CURRENT_SENSORS, (c) => c.id, (c) => c.label, sel.currentSensorId);
+    sel.antennaId = fillSelect(els.antenna, F.ANTENNAS, (a) => a.id, (a) => a.label, sel.antennaId);
+    sel.landingGearId = fillSelect(els.landingGear, F.LANDING_GEAR, (l) => l.id, (l) => l.label, sel.landingGearId);
+    sel.buzzerId = fillSelect(els.buzzer, F.BUZZERS, (b) => b.id, (b) => b.label, sel.buzzerId);
+    sel.ledId = fillSelect(els.led, F.LED_KITS, (l) => l.id, (l) => l.label, sel.ledId);
+    sel.mountId = fillSelect(els.mount, F.BATTERY_MOUNTING, (m) => m.id, (m) => m.label, sel.mountId);
   }
 
   function renderProtocolPills() {
@@ -136,7 +229,10 @@
   }
 
   function readSelections() {
-    sel.frameId = els.frame.value;
+    const platform = F.byId(F.PLATFORMS, sel.platformId);
+    if (!(platform && platform.hasFpvFramePicker)) {
+      sel.frameId = els.frame.value;
+    }
     sel.motorId = els.motor.value;
     sel.propId = els.prop.value;
     sel.escId = els.esc.value;
@@ -147,6 +243,14 @@
     sel.cameraId = els.camera.value;
     sel.payloadId = els.payload.value;
     sel.receiverId = els.receiver.value;
+    sel.powerModuleId = els.powerModule.value;
+    sel.becId = els.bec.value;
+    sel.currentSensorId = els.currentSensor.value;
+    sel.antennaId = els.antenna.value;
+    sel.landingGearId = els.landingGear.value;
+    sel.buzzerId = els.buzzer.value;
+    sel.ledId = els.led.value;
+    sel.mountId = els.mount.value;
   }
 
   let lastResult = null;
@@ -259,7 +363,10 @@
     recompute();
     wireActions();
 
-    [els.frame, els.motor, els.prop, els.esc, els.battery, els.fc, els.gps, els.video, els.camera, els.payload, els.receiver].forEach((el) => {
+    [
+      els.frame, els.motor, els.prop, els.esc, els.battery, els.fc, els.gps, els.video, els.camera, els.payload, els.receiver,
+      els.powerModule, els.bec, els.currentSensor, els.antenna, els.landingGear, els.buzzer, els.led, els.mount,
+    ].forEach((el) => {
       el.addEventListener("change", recompute);
     });
   }

@@ -21,19 +21,19 @@
     let nextStreakAt = 0;
 
     function maybeSpawnStreak(t) {
-      if (reduceMotion || t < nextStreakAt || streaks.length >= 2) return;
+      if (reduceMotion || t < nextStreakAt || streaks.length >= 4) return;
       const dir = Math.random() < 0.5 ? 1 : -1;
-      const speed = (2.1 + Math.random() * 1.6) * DPR;
+      const speed = (3.2 + Math.random() * 2.4) * DPR;
       streaks.push({
-        x: dir > 0 ? -60 * DPR : w + 60 * DPR,
-        y: Math.random() * h * 0.65,
+        x: dir > 0 ? -40 * DPR : w + 40 * DPR,
+        y: Math.random() * h * 0.7,
         vx: dir * speed * (0.65 + Math.random() * 0.35),
         vy: speed * (0.45 + Math.random() * 0.45),
-        len: (46 + Math.random() * 38) * DPR,
+        len: (22 + Math.random() * 22) * DPR,
         life: 0,
-        maxLife: 85 + Math.random() * 45,
+        maxLife: 40 + Math.random() * 26,
       });
-      nextStreakAt = t + 4500 + Math.random() * 6500;
+      nextStreakAt = t + 700 + Math.random() * 1600;
     }
 
     function drawStreaks(t) {
@@ -54,17 +54,17 @@
         const tailY = s.y - (s.vy / mag) * s.len;
         const grad = ctx.createLinearGradient(tailX, tailY, s.x, s.y);
         grad.addColorStop(0, "rgba(244,197,24,0)");
-        grad.addColorStop(1, `rgba(255,244,214,${0.7 * alpha})`);
+        grad.addColorStop(1, `rgba(255,244,214,${0.55 * alpha})`);
         ctx.strokeStyle = grad;
-        ctx.lineWidth = 1.1 * DPR;
+        ctx.lineWidth = 0.9 * DPR;
         ctx.lineCap = "round";
         ctx.beginPath();
         ctx.moveTo(tailX, tailY);
         ctx.lineTo(s.x, s.y);
         ctx.stroke();
         ctx.beginPath();
-        ctx.fillStyle = `rgba(255,250,235,${0.85 * alpha})`;
-        ctx.arc(s.x, s.y, 1 * DPR, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(255,250,235,${0.65 * alpha})`;
+        ctx.arc(s.x, s.y, 0.8 * DPR, 0, Math.PI * 2);
         ctx.fill();
       }
     }

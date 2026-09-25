@@ -10,7 +10,7 @@
   const PLATFORMS = [
     { id: "fixed-wing", label: "Fixed Wing", frameIds: ["fw-1200", "fw-1800"], hasPayload: true },
     { id: "vtol", label: "VTOL", frameIds: ["vt-compact", "vt-extended"], hasPayload: true },
-    { id: "fpv", label: "FPV", frameIds: ["fpv-5", "fpv-7"], hasPayload: false },
+    { id: "fpv", label: "FPV", frameIds: [], hasPayload: false, hasFpvFramePicker: true },
     { id: "cinelifter", label: "Cinelifter", frameIds: ["cl-10", "cl-13"], hasPayload: true },
     { id: "hexacopter", label: "Hexacopter", frameIds: ["hx-15", "hx-18"], hasPayload: true },
     { id: "octacopter", label: "Octacopter", frameIds: ["oc-20", "oc-24"], hasPayload: true },
@@ -18,21 +18,57 @@
   ];
 
   const FRAMES = [
-    { id: "fw-1200", label: "FW-1200 Wing (1200mm)", motorCount: 1, maxPropIn: 11, baseWeightG: 900, weightBudgetG: 1800, recommendedS: [4, 6], priceINR: 45000 },
-    { id: "fw-1800", label: "FW-1800 Wing (1800mm)", motorCount: 1, maxPropIn: 13, baseWeightG: 1600, weightBudgetG: 3200, recommendedS: [6, 8], priceINR: 78000 },
-    { id: "vt-compact", label: "VT-Compact VTOL Frame", motorCount: 5, maxPropIn: 10, baseWeightG: 1400, weightBudgetG: 2600, recommendedS: [6, 8], priceINR: 95000 },
-    { id: "vt-extended", label: "VT-Extended VTOL Frame", motorCount: 5, maxPropIn: 13, baseWeightG: 2200, weightBudgetG: 4200, recommendedS: [8, 12], priceINR: 165000 },
-    { id: "fpv-5", label: "FPV-5 Frame", motorCount: 4, maxPropIn: 5, baseWeightG: 180, weightBudgetG: 650, recommendedS: [4, 6], priceINR: 12000 },
-    { id: "fpv-7", label: "FPV-7 Frame", motorCount: 4, maxPropIn: 7, baseWeightG: 260, weightBudgetG: 950, recommendedS: [6, 6], priceINR: 18000 },
-    { id: "cl-10", label: "CL-10 Cinelifter Frame", motorCount: 4, maxPropIn: 10, baseWeightG: 1100, weightBudgetG: 2400, recommendedS: [6, 8], priceINR: 52000 },
-    { id: "cl-13", label: "CL-13 Cinelifter Frame", motorCount: 6, maxPropIn: 13, baseWeightG: 1800, weightBudgetG: 3800, recommendedS: [8, 10], priceINR: 88000 },
-    { id: "hx-15", label: "HX-15 Hexacopter Frame", motorCount: 6, maxPropIn: 15, baseWeightG: 1700, weightBudgetG: 3600, recommendedS: [8, 10], priceINR: 72000 },
-    { id: "hx-18", label: "HX-18 Hexacopter Frame", motorCount: 6, maxPropIn: 18, baseWeightG: 2500, weightBudgetG: 5200, recommendedS: [10, 12], priceINR: 118000 },
-    { id: "oc-20", label: "OC-20 Octacopter Frame", motorCount: 8, maxPropIn: 20, baseWeightG: 3600, weightBudgetG: 7500, recommendedS: [10, 12], priceINR: 185000 },
-    { id: "oc-24", label: "OC-24 Octacopter Frame", motorCount: 8, maxPropIn: 24, baseWeightG: 5200, weightBudgetG: 11000, recommendedS: [12, 14], priceINR: 265000 },
-    { id: "int-6", label: "INT-6 Interceptor Frame", motorCount: 4, maxPropIn: 6, baseWeightG: 140, weightBudgetG: 520, recommendedS: [6, 6], priceINR: 22000 },
-    { id: "int-7", label: "INT-7 Interceptor Frame", motorCount: 4, maxPropIn: 7, baseWeightG: 190, weightBudgetG: 680, recommendedS: [6, 6], priceINR: 28000 },
+    { id: "fw-1200", label: "FW-1200 Wing (1200mm)", style: "Fixed Wing", sizeIn: null, motorCount: 1, maxPropIn: 11, baseWeightG: 900, weightBudgetG: 1800, recommendedS: [4, 6], priceINR: 45000 },
+    { id: "fw-1800", label: "FW-1800 Wing (1800mm)", style: "Fixed Wing", sizeIn: null, motorCount: 1, maxPropIn: 13, baseWeightG: 1600, weightBudgetG: 3200, recommendedS: [6, 8], priceINR: 78000 },
+    { id: "vt-compact", label: "VT-Compact VTOL Frame", style: "VTOL", sizeIn: null, motorCount: 5, maxPropIn: 10, baseWeightG: 1400, weightBudgetG: 2600, recommendedS: [6, 8], priceINR: 95000 },
+    { id: "vt-extended", label: "VT-Extended VTOL Frame", style: "VTOL", sizeIn: null, motorCount: 5, maxPropIn: 13, baseWeightG: 2200, weightBudgetG: 4200, recommendedS: [8, 12], priceINR: 165000 },
+    { id: "cl-10", label: "CL-10 Cinelifter Frame", style: "Long X", sizeIn: 10, motorCount: 4, maxPropIn: 10, baseWeightG: 1100, weightBudgetG: 2400, recommendedS: [6, 8], priceINR: 52000 },
+    { id: "cl-13", label: "CL-13 Cinelifter Frame", style: "H-Frame", sizeIn: 13, motorCount: 6, maxPropIn: 13, baseWeightG: 1800, weightBudgetG: 3800, recommendedS: [8, 10], priceINR: 88000 },
+    { id: "hx-15", label: "HX-15 Hexacopter Frame", style: "Straight X", sizeIn: 15, motorCount: 6, maxPropIn: 15, baseWeightG: 1700, weightBudgetG: 3600, recommendedS: [8, 10], priceINR: 72000 },
+    { id: "hx-18", label: "HX-18 Hexacopter Frame", style: "Straight X", sizeIn: 18, motorCount: 6, maxPropIn: 18, baseWeightG: 2500, weightBudgetG: 5200, recommendedS: [10, 12], priceINR: 118000 },
+    { id: "oc-20", label: "OC-20 Octacopter Frame", style: "H-Frame", sizeIn: 20, motorCount: 8, maxPropIn: 20, baseWeightG: 3600, weightBudgetG: 7500, recommendedS: [10, 12], priceINR: 185000 },
+    { id: "oc-24", label: "OC-24 Octacopter Frame", style: "H-Frame", sizeIn: 24, motorCount: 8, maxPropIn: 24, baseWeightG: 5200, weightBudgetG: 11000, recommendedS: [12, 14], priceINR: 265000 },
+    { id: "int-6", label: "INT-6 Interceptor Frame", style: "Deadcat", sizeIn: 6, motorCount: 4, maxPropIn: 6, baseWeightG: 140, weightBudgetG: 520, recommendedS: [6, 6], priceINR: 22000 },
+    { id: "int-7", label: "INT-7 Interceptor Frame", style: "Deadcat", sizeIn: 7, motorCount: 4, maxPropIn: 7, baseWeightG: 190, weightBudgetG: 680, recommendedS: [6, 6], priceINR: 28000 },
   ];
+
+  /* ---------------- FPV Frames: style + size component library ----------------
+     Practical frame library covering the standard FPV frame styles across the
+     standard size chart. Weight/price are approximate, size-scaled figures. */
+  const FPV_FRAME_STYLES = [
+    { id: "true-x", label: "True X", desc: "Symmetric X arms with equal spacing — balanced, predictable freestyle handling.", weightFactor: 1.0 },
+    { id: "straight-x", label: "Straight X", desc: "Flat X arm mount with a wide, unobstructed camera view — the standard racing layout.", weightFactor: 0.95 },
+    { id: "deadcat", label: "Deadcat", desc: "Front arms swept forward to keep props out of the camera's field of view.", weightFactor: 1.05 },
+    { id: "stretch-x", label: "Stretch X", desc: "Elongated wheelbase with a shorter front and longer rear for smooth, stable flight.", weightFactor: 1.15 },
+    { id: "long-x", label: "Long X", desc: "Extended arms with extra deck space for long-range batteries and antennas.", weightFactor: 1.2 },
+    { id: "h-frame", label: "H-Frame", desc: "Parallel side rails in an H layout — simple, rigid and easy to repair.", weightFactor: 1.1 },
+    { id: "cinewhoop", label: "Cinewhoop", desc: "Ducted props for safe, stable close-proximity and indoor cinematic flying.", weightFactor: 1.3 },
+  ];
+  const FPV_FRAME_SIZES = [2, 3, 3.5, 4, 5, 6, 7, 8];
+
+  function fpvFrameId(styleId, sizeIn) {
+    return "fpv-" + styleId + "-" + String(sizeIn).replace(".", "p");
+  }
+  function buildFpvFrame(style, sizeIn) {
+    const weightG = Math.round((16 + sizeIn * sizeIn * 3.1) * style.weightFactor);
+    const priceINR = Math.round(((850 + sizeIn * sizeIn * 55) * (0.9 + style.weightFactor * 0.2)) / 10) * 10;
+    return {
+      id: fpvFrameId(style.id, sizeIn),
+      label: `${style.label} ${sizeIn}″`,
+      style: style.label,
+      styleId: style.id,
+      sizeIn,
+      motorCount: 4,
+      maxPropIn: sizeIn,
+      baseWeightG: weightG,
+      weightBudgetG: Math.round(weightG * 3.4),
+      recommendedS: sizeIn <= 3.5 ? [2, 4] : sizeIn <= 5 ? [4, 6] : [6, 6],
+      priceINR,
+    };
+  }
+  const FPV_FRAMES = FPV_FRAME_STYLES.reduce((all, style) => all.concat(FPV_FRAME_SIZES.map((size) => buildFpvFrame(style, size))), []);
+  FRAMES.push.apply(FRAMES, FPV_FRAMES);
+  byId(PLATFORMS, "fpv").frameIds = FPV_FRAMES.map((f) => f.id);
 
   const MOTORS = [
     { id: "m-1404", label: "M-1404 Micro", kv: 3800, recommendedS: [4, 6], maxCurrentA: 20, weightG: 11, priceINR: 850 },
@@ -63,12 +99,54 @@
   ];
 
   const BATTERIES = [
-    { id: "bat-4s-2200", label: "4S 2,200mAh", s: 4, mah: 2200, weightG: 240, priceINR: 1800 },
-    { id: "bat-6s-2500", label: "6S 2,500mAh", s: 6, mah: 2500, weightG: 340, priceINR: 2600 },
-    { id: "bat-6s-5200", label: "6S 5,200mAh", s: 6, mah: 5200, weightG: 680, priceINR: 4400 },
-    { id: "bat-8s-10200", label: "8S 10,200mAh", s: 8, mah: 10200, weightG: 1850, priceINR: 9800 },
-    { id: "bat-10s-12000", label: "10S 12,000mAh", s: 10, mah: 12000, weightG: 2600, priceINR: 14500 },
-    { id: "bat-12s-16000", label: "12S 16,000mAh", s: 12, mah: 16000, weightG: 3800, priceINR: 21000 },
+    { id: "bat-2s-650", label: "2S 650mAh", s: 2, mah: 650, connector: "PH2.0", weightG: 38, priceINR: 450 },
+    { id: "bat-3s-1300", label: "3S 1,300mAh", s: 3, mah: 1300, connector: "XT30", weightG: 105, priceINR: 850 },
+    { id: "bat-4s-2200", label: "4S 2,200mAh", s: 4, mah: 2200, connector: "XT30", weightG: 240, priceINR: 1800 },
+    { id: "bat-5s-1800", label: "5S 1,800mAh", s: 5, mah: 1800, connector: "XT60", weightG: 260, priceINR: 2100 },
+    { id: "bat-6s-2500", label: "6S 2,500mAh", s: 6, mah: 2500, connector: "XT60", weightG: 340, priceINR: 2600 },
+    { id: "bat-6s-5200", label: "6S 5,200mAh", s: 6, mah: 5200, connector: "XT60", weightG: 680, priceINR: 4400 },
+    { id: "bat-8s-10200", label: "8S 10,200mAh", s: 8, mah: 10200, connector: "XT90", weightG: 1850, priceINR: 9800 },
+    { id: "bat-10s-12000", label: "10S 12,000mAh", s: 10, mah: 12000, connector: "XT90", weightG: 2600, priceINR: 14500 },
+    { id: "bat-12s-16000", label: "12S 16,000mAh", s: 12, mah: 16000, connector: "AS150", weightG: 3800, priceINR: 21000 },
+  ];
+
+  /* ---------------- Additional practical component library ---------------- */
+  const POWER_MODULES = [
+    { id: "pm-standard", label: "Power Module — Standard (90A)", maxCurrentA: 90, weightG: 9, priceINR: 650 },
+    { id: "pm-highcurrent", label: "Power Module — High Current (180A)", maxCurrentA: 180, weightG: 14, priceINR: 1200 },
+  ];
+  const BEC_MODULES = [
+    { id: "bec-5v", label: "BEC — 5V / 2A", outputV: 5, weightG: 3, priceINR: 250 },
+    { id: "bec-9v", label: "BEC — 9V / 3A (Digital VTX)", outputV: 9, weightG: 4, priceINR: 320 },
+    { id: "bec-12v", label: "BEC — 12V / 5A", outputV: 12, weightG: 6, priceINR: 450 },
+  ];
+  const CURRENT_SENSORS = [
+    { id: "cs-90a", label: "Current Sensor — 90A", maxCurrentA: 90, weightG: 2, priceINR: 300 },
+    { id: "cs-180a", label: "Current Sensor — 180A", maxCurrentA: 180, weightG: 3, priceINR: 480 },
+  ];
+  const ANTENNAS = [
+    { id: "ant-stubby", label: "Stubby Antenna (Analog)", compatibleVideo: ["vid-analog"], weightG: 3, priceINR: 350 },
+    { id: "ant-dipole", label: "Dipole Antenna (Digital)", compatibleVideo: ["vid-digital-hd", "vid-encrypted"], weightG: 4, priceINR: 550 },
+    { id: "ant-directional", label: "Directional Patch Antenna (Long-Range)", compatibleVideo: ["vid-digital-hd", "vid-encrypted"], weightG: 22, priceINR: 2200 },
+  ];
+  const LANDING_GEAR = [
+    { id: "lg-none", label: "None — Belly Landing", weightG: 0, priceINR: 0 },
+    { id: "lg-fixed-skid", label: "Fixed Skid Legs", weightG: 40, priceINR: 900 },
+    { id: "lg-retractable", label: "Retractable Landing Gear", weightG: 150, priceINR: 6200 },
+  ];
+  const BUZZERS = [
+    { id: "bz-none", label: "None", weightG: 0, priceINR: 0 },
+    { id: "bz-standard", label: "Lost-Model Buzzer + LED", weightG: 2, priceINR: 180 },
+  ];
+  const LED_KITS = [
+    { id: "led-none", label: "None", weightG: 0, priceINR: 0 },
+    { id: "led-orientation", label: "Orientation LED Strip", weightG: 6, priceINR: 420 },
+    { id: "led-nav", label: "Nav / Position Light Kit", weightG: 12, priceINR: 950 },
+  ];
+  const BATTERY_MOUNTING = [
+    { id: "mount-strap", label: "Velcro Strap Mount", weightG: 3, priceINR: 90 },
+    { id: "mount-tray-lock", label: "Locking Tray Mount", weightG: 14, priceINR: 480 },
+    { id: "mount-internal-bay", label: "Internal Battery Bay", weightG: 22, priceINR: 850 },
   ];
 
   const FLIGHT_CONTROLLERS = [
@@ -145,6 +223,14 @@
     const video = byId(VIDEO_SYSTEMS, sel.videoId);
     const camera = byId(CAMERAS, sel.cameraId);
     const payload = byId(PAYLOADS, sel.payloadId) || PAYLOADS[0];
+    const powerModule = byId(POWER_MODULES, sel.powerModuleId);
+    const bec = byId(BEC_MODULES, sel.becId);
+    const currentSensor = byId(CURRENT_SENSORS, sel.currentSensorId);
+    const antenna = byId(ANTENNAS, sel.antennaId);
+    const landingGear = byId(LANDING_GEAR, sel.landingGearId) || LANDING_GEAR[0];
+    const buzzer = byId(BUZZERS, sel.buzzerId) || BUZZERS[0];
+    const led = byId(LED_KITS, sel.ledId) || LED_KITS[0];
+    const mounting = byId(BATTERY_MOUNTING, sel.mountId);
 
     const checks = [];
 
@@ -221,6 +307,49 @@
       });
     }
 
+    if (currentSensor && esc) {
+      const status = currentSensor.maxCurrentA >= esc.currentA ? "ok" : "check";
+      checks.push({
+        key: "sensor-esc",
+        label: "Current Sensor ↔ ESC",
+        status,
+        detail:
+          status === "ok"
+            ? `${currentSensor.label} covers ${esc.label}'s ${esc.currentA}A rating.`
+            : `${currentSensor.label} is rated below ${esc.label}'s ${esc.currentA}A rating and may clip readings.`,
+        fix: status !== "ok" ? "Choose a higher-rated current sensor or power module." : null,
+      });
+    }
+
+    if (antenna && video) {
+      const status = antenna.compatibleVideo.includes(video.id) ? "ok" : "bad";
+      checks.push({
+        key: "antenna-video",
+        label: "Antenna ↔ Video System",
+        status,
+        detail:
+          status === "ok"
+            ? `${antenna.label} matches the selected ${video.label} system.`
+            : `${antenna.label} is not intended for the selected ${video.label} system.`,
+        fix: status !== "ok" ? "Choose an antenna matched to the selected video system." : null,
+      });
+    }
+
+    if (bec && video) {
+      const needsNine = video.id !== "vid-analog";
+      const status = needsNine && bec.outputV < 9 ? "check" : "ok";
+      checks.push({
+        key: "bec-video",
+        label: "BEC ↔ Video System",
+        status,
+        detail:
+          status === "ok"
+            ? `${bec.label} supplies enough voltage for ${video.label}.`
+            : `${bec.label} may under-supply the selected ${video.label} system, which typically wants 9V+.`,
+        fix: status !== "ok" ? "Choose a 9V or 12V BEC for digital video systems." : null,
+      });
+    }
+
     // Weight estimate
     const motorCount = frame ? frame.motorCount : 1;
     const partWeights = [
@@ -235,6 +364,14 @@
       video ? video.weightG : 0,
       camera ? camera.weightG : 0,
       payload ? payload.weightG : 0,
+      powerModule ? powerModule.weightG : 0,
+      bec ? bec.weightG : 0,
+      currentSensor ? currentSensor.weightG : 0,
+      antenna ? antenna.weightG : 0,
+      landingGear.weightG,
+      buzzer.weightG,
+      led.weightG,
+      mounting ? mounting.weightG : 0,
     ];
     const estimatedWeightG = partWeights.reduce((a, b) => a + b, 0);
 
@@ -271,6 +408,14 @@
       video ? video.priceINR : 0,
       camera ? camera.priceINR : 0,
       payload ? payload.priceINR : 0,
+      powerModule ? powerModule.priceINR : 0,
+      bec ? bec.priceINR : 0,
+      currentSensor ? currentSensor.priceINR : 0,
+      antenna ? antenna.priceINR : 0,
+      landingGear.priceINR,
+      buzzer.priceINR,
+      led.priceINR,
+      mounting ? mounting.priceINR : 0,
     ];
     const totalPriceINR = priceParts.reduce((a, b) => a + b, 0);
 
@@ -285,7 +430,7 @@
     const estimatedRangeKm = Math.round((estimatedEnduranceMin / 60) * estimatedTopSpeedKmh * 0.55);
 
     return {
-      parts: { frame, motor, prop, esc, battery, fc, gps, receiver, video, camera, payload },
+      parts: { frame, motor, prop, esc, battery, fc, gps, receiver, video, camera, payload, powerModule, bec, currentSensor, antenna, landingGear, buzzer, led, mounting },
       motorCount,
       checks,
       overallStatus,
@@ -302,6 +447,10 @@
   window.SentinelForge = {
     PLATFORMS,
     FRAMES,
+    FPV_FRAME_STYLES,
+    FPV_FRAME_SIZES,
+    FPV_FRAMES,
+    fpvFrameId,
     MOTORS,
     PROPELLERS,
     ESCS,
@@ -313,6 +462,14 @@
     VIDEO_SYSTEMS,
     CAMERAS,
     PAYLOADS,
+    POWER_MODULES,
+    BEC_MODULES,
+    CURRENT_SENSORS,
+    ANTENNAS,
+    LANDING_GEAR,
+    BUZZERS,
+    LED_KITS,
+    BATTERY_MOUNTING,
     STATUS_LABEL,
     byId,
     computeConfiguration,

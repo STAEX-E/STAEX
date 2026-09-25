@@ -20,7 +20,7 @@
   --radius-md: 20px;
   --radius-sm: 12px;
 
-  --gap-section: clamp(5rem, 12vw, 10rem);
+  --gap-section: clamp(2.75rem, 6.5vw, 5.25rem);
   --pad-inline: clamp(1.25rem, 5vw, 4rem);
 
   --ff-base: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
@@ -314,12 +314,12 @@ section {
   display: inline-flex;
   align-items: center;
   gap: .5rem;
-  font-size: .72rem;
+  font-size: .7rem;
   letter-spacing: .22em;
   text-transform: uppercase;
   font-weight: 700;
   color: var(--c-yellow);
-  margin-bottom: 1.1rem;
+  margin-bottom: .7rem;
 }
 
 .eyebrow::before {
@@ -333,24 +333,24 @@ h1, h2, h3, h4 {
   font-weight: 800;
   letter-spacing: -.01em;
   line-height: 1.05;
-  margin: 0 0 1rem;
+  margin: 0 0 .6rem;
 }
 
-h1 { font-size: clamp(2.6rem, 7vw, 5.4rem); letter-spacing: -.02em; }
-h2 { font-size: clamp(1.9rem, 4.4vw, 3.2rem); }
-h3 { font-size: clamp(1.2rem, 2.2vw, 1.6rem); }
+h1 { font-size: clamp(2.4rem, 6.2vw, 4.6rem); letter-spacing: -.02em; }
+h2 { font-size: clamp(1.5rem, 2.6vw, 2.05rem); }
+h3 { font-size: clamp(1.05rem, 1.6vw, 1.3rem); }
 
-p { color: var(--c-gray-light); line-height: 1.7; font-size: 1.02rem; }
+p { color: var(--c-gray-light); line-height: 1.65; font-size: 1rem; }
 
 .lead {
-  font-size: clamp(1.05rem, 1.6vw, 1.3rem);
+  font-size: clamp(1rem, 1.4vw, 1.18rem);
   color: var(--c-gray-light);
   max-width: 640px;
 }
 
 .section-head {
   max-width: 720px;
-  margin-bottom: clamp(2.5rem, 6vw, 4.5rem);
+  margin-bottom: clamp(1.4rem, 3vw, 2.2rem);
 }
 
 /* Reveal-on-scroll */
@@ -503,11 +503,12 @@ p { color: var(--c-gray-light); line-height: 1.7; font-size: 1.02rem; }
 
 /* Page header (non-home hero, shorter) */
 .page-header {
-  min-height: 58vh;
+  min-height: 38vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding-top: 8rem;
+  padding-top: 6.5rem;
+  padding-bottom: 1.5rem;
 }
 
 /* ============================================================
@@ -517,7 +518,7 @@ p { color: var(--c-gray-light); line-height: 1.7; font-size: 1.02rem; }
   background: linear-gradient(160deg, var(--c-panel), var(--c-bg-soft));
   border: 1px solid var(--c-border);
   border-radius: var(--radius-lg);
-  padding: clamp(1.6rem, 3vw, 2.6rem);
+  padding: clamp(1.2rem, 2vw, 1.8rem);
   position: relative;
   overflow: hidden;
   transition: border-color .4s var(--ease-out), transform .4s var(--ease-out);
@@ -543,7 +544,7 @@ p { color: var(--c-gray-light); line-height: 1.7; font-size: 1.02rem; }
 
 .grid {
   display: grid;
-  gap: 1.4rem;
+  gap: 1rem;
 }
 .grid-2 { grid-template-columns: repeat(2, 1fr); }
 .grid-3 { grid-template-columns: repeat(3, 1fr); }
@@ -558,7 +559,7 @@ p { color: var(--c-gray-light); line-height: 1.7; font-size: 1.02rem; }
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 1.4rem;
+  margin-bottom: .9rem;
   color: var(--c-yellow);
 }
 .icon-tile svg { width: 22px; height: 22px; }
@@ -967,6 +968,79 @@ footer nav a:hover { color: var(--c-yellow); }
 .spec-row span {
   font-size: .68rem;
   letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--c-gray);
+}
+
+/* ============================================================
+   Award badge — vanilla stand-in for achievement recognition
+   ============================================================ */
+.award-panel { display: flex; flex-direction: column; gap: 1.2rem; }
+.award-badge {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  min-height: 200px;
+  padding: 1.2rem .5rem .4rem;
+  overflow: hidden;
+}
+.award-badge__wreath {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 88%;
+  transform: translate(-50%, -54%);
+  fill: var(--c-yellow);
+  opacity: .14;
+  z-index: 0;
+  pointer-events: none;
+}
+.award-badge__level {
+  position: relative;
+  z-index: 1;
+  display: inline-block;
+  margin-bottom: .5rem;
+  padding: .25rem .85rem;
+  border-radius: 999px;
+  font-size: .6rem;
+  font-weight: 800;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: #14110a;
+  background: linear-gradient(100deg, var(--c-yellow), var(--c-orange));
+}
+.award-badge__title {
+  position: relative;
+  z-index: 1;
+  font-size: 1.4rem;
+  font-weight: 800;
+  letter-spacing: .04em;
+  margin: 0 0 .3rem;
+}
+.award-badge__rule {
+  position: relative;
+  z-index: 1;
+  width: 56px;
+  height: 1px;
+  background: linear-gradient(90deg, var(--c-orange), var(--c-yellow));
+  margin: .1rem 0 .55rem;
+}
+.award-badge__subtitle {
+  position: relative;
+  z-index: 1;
+  font-size: .82rem;
+  color: var(--c-gray-light);
+  max-width: 28ch;
+  margin: 0 0 .4rem;
+}
+.award-badge__meta {
+  position: relative;
+  z-index: 1;
+  font-size: .68rem;
+  letter-spacing: .06em;
   text-transform: uppercase;
   color: var(--c-gray);
 }
