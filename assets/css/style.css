@@ -746,9 +746,9 @@ footer nav a:hover { color: var(--c-yellow); }
 .product-card h3 { font-size: clamp(1.4rem, 2.6vw, 1.9rem); }
 
 .spec-row {
-  display: flex;
-  flex-wrap: wrap;
-  gap: .6rem 1.6rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(118px, 1fr));
+  gap: 1rem 1.2rem;
   margin: 1.2rem 0 1.3rem;
   padding-top: 1.1rem;
   border-top: 1px solid var(--c-border);
