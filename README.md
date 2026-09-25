@@ -1,2 +1,3 @@
 # Sentinel Dynamics
-A futuristic aerospace and defense website showcasing an innovative defense business model inspired by SpaceGen Aviation. It presents the company, achievements, services, and advanced UAV platforms through a premium minimalist design with bold black, yellow, gray, and orange visuals, cinematic drone imagery, and aviation-inspired scroll animations.
+
+A premium, cinematic aerospace and defense technology platform — a full product catalog, search, the FORGE LAB configurator, cart, in-site procurement, a compare tool, a gallery, and customer service, built entirely with HTML5, CSS3 and vanilla JavaScript for GitHub Pages. Bold black/gray/white base with yellow/orange accents, a distinctive shimmering wordmark, and a subtle animated particle/shooting-star background throughout.

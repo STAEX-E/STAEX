@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Products — Sentinel Dynamics Catalog</title>
-<meta name="description" content="The full Sentinel Dynamics catalog — VTOLs, Counter-UAS, UAS, Drones and FPV platforms, from fielded systems to conceptual next-generation designs.">
+<title id="pd-title">Product — Sentinel Dynamics</title>
+<meta name="description" id="pd-meta-desc" content="Sentinel Dynamics platform detail.">
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27%3E%3Cdefs%3E%3ClinearGradient id=%27g%27 x1=%270%27 y1=%270%27 x2=%271%27 y2=%271%27%3E%3Cstop offset=%270%25%27 stop-color=%27%23f4c518%27/%3E%3Cstop offset=%27100%25%27 stop-color=%27%23ff7a1a%27/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpolygon points=%2712,0 24,6 24,18 12,24 0,18 0,6%27 fill=%27url(%23g)%27/%3E%3C/svg%3E">
 <link rel="stylesheet" href="assets/css/style.css">
 </head>
@@ -42,28 +42,47 @@
 </nav>
 
 <header class="page-header container">
-  <p class="eyebrow reveal">The Catalog</p>
-  <h1 class="reveal">Every platform. One unified defense architecture.</h1>
-  <p class="lead reveal">From fielded interceptors to conceptual next-generation systems — VTOLs, Counter-UAS, UAS, Drones and FPV platforms, all built on the same design philosophy: light, precise, and built for real deployment.</p>
+  <a class="text-link text-link--back reveal" href="products.html"><span class="arrow">←</span> All Products</a>
+  <p class="eyebrow reveal" id="pd-tag" style="margin-top:1.6rem;"></p>
+  <h1 class="reveal" id="pd-name"></h1>
+  <p class="lead reveal" id="pd-short"></p>
 </header>
 
-<section id="platforms">
+<section id="detail">
   <div class="container">
-    <div class="products-toolbar reveal">
-      <div class="select-field">
-        <select id="category-filter" aria-label="Filter by category">
-          <option value="all">All Categories</option>
-          <option value="vtol">VTOLs</option>
-          <option value="counter-uas">Counter-UAS</option>
-          <option value="uas">UAS</option>
-          <option value="drone">Drones</option>
-          <option value="fpv">FPV</option>
-        </select>
+    <div class="product-detail-visual reveal" id="pd-visual"></div>
+
+    <div class="product-detail-body reveal">
+      <div class="pd-status-line" id="pd-status-line"></div>
+      <div class="spec-row" id="pd-specs"></div>
+      <p id="pd-description"></p>
+
+      <div class="panel pd-purchase">
+        <div class="pd-purchase__price">
+          <small>Estimated Price</small>
+          <div id="pd-price">—</div>
+        </div>
+        <div class="pd-purchase__row">
+          <div class="qty-stepper">
+            <button type="button" id="qty-minus" aria-label="Decrease quantity">−</button>
+            <input type="text" id="qty-input" value="01" readonly aria-label="Quantity">
+            <button type="button" id="qty-plus" aria-label="Increase quantity">+</button>
+          </div>
+          <div class="pd-total" id="pd-total">—</div>
+        </div>
+        <div class="btn-row" style="margin-top:1.2rem;">
+          <a class="btn btn--ghost" id="pd-configure" href="#">Configure</a>
+          <button class="btn btn--ghost" id="pd-add-cart" type="button">Add to Cart</button>
+        </div>
+        <button class="btn btn--primary btn--block" id="pd-buy-now" type="button" style="margin-top:.6rem;">Buy Now</button>
+        <p style="font-size:.72rem; color:var(--c-gray); margin:.9rem 0 0;">Estimated price shown for planning purposes. Final configuration and pricing confirmed during procurement.</p>
       </div>
-      <div class="products-toolbar__count"><strong id="products-count">0</strong> platforms shown</div>
     </div>
 
-    <div class="products-grid" id="products-grid"></div>
+    <div class="product-nav-row">
+      <a class="text-link text-link--back" href="products.html"><span class="arrow">←</span> All Products</a>
+      <a class="text-link" href="compare.html">Compare Systems <span class="arrow">→</span></a>
+    </div>
   </div>
 </section>
 
@@ -71,11 +90,12 @@
   <div class="container">
     <div class="cta-band reveal">
       <div>
-        <p class="eyebrow">Behind the Fleet</p>
-        <h2>See how the model came together.</h2>
+        <p class="eyebrow">Need Something Specific?</p>
+        <h2>Search the catalog or build a custom configuration.</h2>
       </div>
       <div class="cta-band__links">
-        <a class="text-link" href="about.html">About Sentinel Dynamics <span class="arrow">→</span></a>
+        <a class="text-link" href="product-search.html">Search Products <span class="arrow">→</span></a>
+        <a class="text-link" href="forge-lab.html">Open Forge Lab <span class="arrow">→</span></a>
       </div>
     </div>
   </div>
@@ -94,7 +114,7 @@
 
 <script src="assets/js/products-data.js"></script>
 <script src="assets/js/cart.js"></script>
-<script src="assets/js/products-page.js"></script>
+<script src="assets/js/product-detail-page.js"></script>
 <script src="assets/js/particles.js"></script>
 <script src="assets/js/main.js"></script>
 </body>
