@@ -153,9 +153,17 @@
       my = (e.clientY / window.innerHeight - 0.5) * 26;
     });
 
+    const pinWrap = document.getElementById("hero-pin-wrap");
+
     function progress() {
-      const p = window.scrollY / (window.innerHeight * 0.85);
-      return Math.max(0, Math.min(1, p));
+      if (!pinWrap) {
+        const p = window.scrollY / (window.innerHeight * 0.85);
+        return Math.max(0, Math.min(1, p));
+      }
+      const rect = pinWrap.getBoundingClientRect();
+      const scrollable = rect.height - window.innerHeight;
+      if (scrollable <= 0) return 1;
+      return Math.max(0, Math.min(1, -rect.top / scrollable));
     }
 
     function ease(t) { return 1 - Math.pow(1 - t, 3); }
