@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Forge Lab — Sentinel Dynamics</title>
+<meta name="description" content="FORGE LAB — design, configure and deploy a custom Sentinel Dynamics platform with live compatibility checking, pricing and estimated performance.">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27%3E%3Cdefs%3E%3ClinearGradient id=%27g%27 x1=%270%27 y1=%270%27 x2=%271%27 y2=%271%27%3E%3Cstop offset=%270%25%27 stop-color=%27%23f4c518%27/%3E%3Cstop offset=%27100%25%27 stop-color=%27%23ff7a1a%27/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpolygon points=%2712,0 24,6 24,18 12,24 0,18 0,6%27 fill=%27url(%23g)%27/%3E%3C/svg%3E">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+<canvas id="bg-field" aria-hidden="true"></canvas>
+<div id="scroll-progress"></div>
+
+<nav class="nav">
+  <a href="index.html" class="nav__brand">
+    <span class="mark"></span>
+    <span class="brand-lockup"><span class="brand-word">SENTINEL</span><span class="brand-word--sub">DYNAMICS</span></span>
+  </a>
+  <div class="nav__right">
+    <div class="nav__links">
+    <a href="index.html">Home</a>
+    <a href="products.html">Products</a>
+    <a href="forge-lab.html" aria-current="page">Forge Lab</a>
+    <a href="business-model.html">Business Model</a>
+    <a href="about.html">About Us</a>
+    </div>
+    <div class="nav__utility">
+      <a href="product-search.html" class="nav__icon-btn" aria-label="Search Products" title="Search Products">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.35-4.35"/></svg>
+      </a>
+      <a href="compare.html" class="nav__icon-btn" aria-label="Compare Systems" title="Compare Systems">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 3v18M3 9h6M3 15h6M15 3v18M15 9h6M15 15h6"/></svg>
+      </a>
+      <a href="cart.html" class="nav__icon-btn" aria-label="Cart" title="Cart">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="9" cy="21" r="1.4"/><circle cx="19" cy="21" r="1.4"/><path d="M2.5 3h2l2.6 12.6a2 2 0 0 0 2 1.6h8a2 2 0 0 0 2-1.9L21 8H6"/></svg>
+        <span class="cart-badge" data-cart-badge>00</span>
+      </a>
+    </div>
+  </div>
+</nav>
+
+<header class="page-header container">
+  <p class="eyebrow reveal">Forge Lab</p>
+  <h1 class="reveal">FORGE LAB</h1>
+  <p class="forge-tagline reveal">DESIGN. CONFIGURE. DEPLOY.</p>
+  <p class="lead reveal" style="margin-top:1rem;">Build a custom platform from the ground up — every selection checked for compatibility, priced live, and estimated in real time.</p>
+</header>
+
+<section id="forge">
+  <div class="container forge-layout">
+    <div class="forge-main">
+
+      <div class="forge-step reveal">
+        <h3>01 — Select Platform</h3>
+        <p class="forge-step__hint">Choose the airframe class you're building.</p>
+        <div class="forge-options" id="forge-platforms"></div>
+      </div>
+
+      <div class="forge-step reveal">
+        <h3>02 — Frame</h3>
+        <p class="forge-step__hint">Frame options update based on your platform.</p>
+        <div class="forge-field">
+          <label for="forge-frame">Frame</label>
+          <div class="select-field"><select id="forge-frame"></select></div>
+        </div>
+      </div>
+
+      <div class="forge-step reveal">
+        <h3>03 — Propulsion</h3>
+        <p class="forge-step__hint">Motor, propeller and ESC selection.</p>
+        <div class="forge-grid">
+          <div class="forge-field"><label for="forge-motor">Motor</label><div class="select-field"><select id="forge-motor"></select></div></div>
+          <div class="forge-field"><label for="forge-prop">Propeller</label><div class="select-field"><select id="forge-prop"></select></div></div>
+          <div class="forge-field"><label for="forge-esc">ESC</label><div class="select-field"><select id="forge-esc"></select></div></div>
+        </div>
+      </div>
+
+      <div class="forge-step reveal">
+        <h3>04 — Electronics</h3>
+        <p class="forge-step__hint">Only components relevant to your platform are shown.</p>
+        <div class="forge-grid">
+          <div class="forge-field"><label for="forge-battery">Battery</label><div class="select-field"><select id="forge-battery"></select></div></div>
+          <div class="forge-field"><label for="forge-fc">Flight Controller</label><div class="select-field"><select id="forge-fc"></select></div></div>
+          <div class="forge-field"><label for="forge-gps">GPS / Navigation</label><div class="select-field"><select id="forge-gps"></select></div></div>
+        </div>
+        <div class="forge-grid" style="margin-top:1rem;">
+          <div class="forge-field"><label for="forge-video">Video System</label><div class="select-field"><select id="forge-video"></select></div></div>
+          <div class="forge-field"><label for="forge-camera">Camera</label><div class="select-field"><select id="forge-camera"></select></div></div>
+          <div class="forge-field" id="forge-payload-field"><label for="forge-payload">Payload</label><div class="select-field"><select id="forge-payload"></select></div></div>
+        </div>
+      </div>
+
+      <div class="forge-step reveal">
+        <h3>05 — Communication</h3>
+        <p class="forge-step__hint">Select a protocol, then a matching receiver.</p>
+        <div class="forge-pills" id="forge-protocols"></div>
+        <div class="forge-field" style="margin-top:1.2rem; max-width:320px;">
+          <label for="forge-receiver">Receiver</label>
+          <div class="select-field"><select id="forge-receiver"></select></div>
+        </div>
+      </div>
+
+      <div class="forge-step reveal">
+        <h3>Compatibility Report</h3>
+        <p class="forge-step__hint">Predefined compatibility rules checked live against your build.</p>
+        <div class="panel check-list" id="forge-checks"></div>
+      </div>
+
+    </div>
+
+    <aside class="forge-summary reveal" id="forge-summary">
+      <div class="forge-summary__status" id="forge-status"></div>
+      <div class="forge-summary__price-label">Estimated Total Price</div>
+      <div class="forge-summary__price" id="forge-price">—</div>
+
+      <div class="forge-estimates">
+        <div class="forge-estimate"><small>Est. Weight</small><strong id="est-weight">—</strong></div>
+        <div class="forge-estimate"><small>Est. Payload Headroom</small><strong id="est-payload">—</strong></div>
+        <div class="forge-estimate"><small>Est. Endurance</small><strong id="est-endurance">—</strong></div>
+        <div class="forge-estimate"><small>Est. Top Speed</small><strong id="est-speed">—</strong></div>
+        <div class="forge-estimate"><small>Est. Range</small><strong id="est-range">—</strong></div>
+        <div class="forge-estimate"><small>Motor Count</small><strong id="est-motors">—</strong></div>
+      </div>
+
+      <div class="forge-summary__actions">
+        <button class="btn btn--ghost btn--block" id="forge-save" type="button">Save Configuration</button>
+        <button class="btn btn--ghost btn--block" id="forge-add-cart" type="button">Add to Cart</button>
+        <button class="btn btn--primary btn--block" id="forge-buy-now" type="button">Buy Now</button>
+        <a class="btn btn--outline btn--block" id="forge-quote" href="customer-service.html">Request a Quote</a>
+      </div>
+      <p class="forge-summary__disclaimer">All weight, payload, endurance, speed and range figures are simplified <strong>estimates</strong> for planning purposes, not certified performance data. Final pricing and specification are confirmed during procurement.</p>
+    </aside>
+  </div>
+</section>
+
+<section id="cta">
+  <div class="container">
+    <div class="cta-band reveal">
+      <div>
+        <p class="eyebrow">Not Building From Scratch?</p>
+        <h2>Start from a fielded platform instead.</h2>
+      </div>
+      <div class="cta-band__links">
+        <a class="text-link" href="products.html">Browse the Catalog <span class="arrow">→</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="foot__brand">Sentinel Dynamics</div>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="products.html">Products</a>
+    <a href="business-model.html">Business Model</a>
+    <a href="about.html">About Us</a>
+  </nav>
+  <div class="foot__meta">Independent Aerospace &amp; Defense Technology</div>
+</footer>
+
+<script src="assets/js/products-data.js"></script>
+<script src="assets/js/components-data.js"></script>
+<script src="assets/js/cart.js"></script>
+<script src="assets/js/forge-lab-page.js"></script>
+<script src="assets/js/particles.js"></script>
+<script src="assets/js/main.js"></script>
+</body>
+</html>
