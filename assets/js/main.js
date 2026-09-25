@@ -50,5 +50,45 @@
         }
       });
     });
+
+    // Business Model journey: scroll-fill line + active-step tracking
+    const journey = document.getElementById("journey-track");
+    if (journey) {
+      const fill = document.getElementById("journey-fill");
+      const steps = Array.from(journey.querySelectorAll(".journey__step"));
+      const tracker = document.getElementById("journey-tracker");
+      const trackerNum = document.getElementById("journey-tracker-num");
+      const trackerLabel = document.getElementById("journey-tracker-label");
+
+      function updateJourney() {
+        const rect = journey.getBoundingClientRect();
+        const vh = window.innerHeight;
+        const total = rect.height;
+        const passed = Math.min(Math.max(vh / 2 - rect.top, 0), total);
+        const pct = total > 0 ? (passed / total) * 100 : 0;
+        if (fill) fill.style.height = pct + "%";
+
+        let activeStep = null;
+        steps.forEach((step) => {
+          const r = step.getBoundingClientRect();
+          const isActive = r.top < vh * 0.6 && r.bottom > vh * 0.25;
+          step.classList.toggle("is-active", isActive);
+          if (isActive) activeStep = step;
+        });
+
+        if (tracker) {
+          const sectionInView = rect.top < vh && rect.bottom > 0;
+          tracker.classList.toggle("is-visible", sectionInView && !!activeStep);
+          if (activeStep && trackerNum && trackerLabel) {
+            trackerNum.textContent = activeStep.dataset.step || "";
+            trackerLabel.textContent = activeStep.dataset.label || "";
+          }
+        }
+      }
+
+      window.addEventListener("scroll", updateJourney, { passive: true });
+      window.addEventListener("resize", updateJourney);
+      updateJourney();
+    }
   });
 })();

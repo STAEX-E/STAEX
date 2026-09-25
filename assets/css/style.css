@@ -130,11 +130,16 @@ img, svg { display: block; max-width: 100%; }
 
 .nav__links {
   display: flex;
+  flex-wrap: nowrap;
   gap: clamp(1.2rem, 3vw, 2.6rem);
   font-size: .8rem;
   letter-spacing: .1em;
   text-transform: uppercase;
   font-weight: 600;
+}
+
+.nav__links a {
+  white-space: nowrap;
 }
 
 .nav__links a {
@@ -887,6 +892,188 @@ footer nav a:hover { color: var(--c-yellow); }
 .value-card p { font-size: .9rem; }
 
 /* ============================================================
+   Home — Business Model preview stepper
+   ============================================================ */
+.bm-stepper {
+  display: flex;
+  gap: 0;
+  overflow-x: auto;
+  padding: .5rem .25rem 1.25rem;
+  margin: 0 -.25rem;
+  scrollbar-width: thin;
+}
+.bm-stepper__step {
+  flex: 0 0 auto;
+  width: 132px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  position: relative;
+  padding: 0 .5rem;
+}
+.bm-stepper__connector {
+  position: absolute;
+  top: 21px;
+  left: -50%;
+  width: 100%;
+  height: 1px;
+  background: var(--c-border);
+  z-index: 0;
+}
+.bm-stepper__step:first-child .bm-stepper__connector { display: none; }
+.bm-stepper__num {
+  position: relative;
+  z-index: 1;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: 1px solid var(--c-border);
+  background: var(--c-bg-soft);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: .82rem;
+  color: var(--c-yellow);
+  margin-bottom: .8rem;
+}
+.bm-stepper__label {
+  font-size: .72rem;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  color: var(--c-gray-light);
+  font-weight: 600;
+  line-height: 1.35;
+}
+
+/* ============================================================
+   Business Model page — journey timeline
+   ============================================================ */
+.journey {
+  position: relative;
+  margin-top: clamp(2rem, 5vw, 3rem);
+  padding-left: clamp(64px, 8vw, 96px);
+}
+.journey__line {
+  position: absolute;
+  left: 27px;
+  top: 6px;
+  bottom: 6px;
+  width: 2px;
+  background: var(--c-border);
+}
+.journey__line-fill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 0%;
+  background: linear-gradient(var(--c-yellow), var(--c-orange));
+  border-radius: 2px;
+}
+.journey__step {
+  position: relative;
+  padding-bottom: clamp(2.6rem, 6vw, 4rem);
+}
+.journey__step:last-child { padding-bottom: 0; }
+.journey__badge {
+  position: absolute;
+  left: clamp(-64px, -8vw, -96px);
+  top: 0;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--c-bg-soft);
+  border: 1px solid var(--c-border);
+  font-weight: 800;
+  font-size: .92rem;
+  color: var(--c-gray);
+  transition: background .4s var(--ease-out), border-color .4s var(--ease-out), color .4s var(--ease-out), transform .4s var(--ease-out), box-shadow .4s var(--ease-out);
+  z-index: 2;
+}
+.journey__step.is-active .journey__badge {
+  color: #0a0908;
+  background: linear-gradient(135deg, var(--c-yellow), var(--c-orange));
+  border-color: transparent;
+  box-shadow: 0 0 0 6px rgba(244,197,24,.14), 0 10px 26px rgba(244,197,24,.3);
+  transform: scale(1.08);
+}
+.journey__content .icon-tile { margin-bottom: .9rem; }
+.journey__content h3 { transition: color .4s var(--ease-out); margin-bottom: .5rem; }
+.journey__step.is-active .journey__content h3 { color: var(--c-yellow); }
+.journey__content p { max-width: 560px; }
+.journey__step-label {
+  font-size: .68rem;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--c-orange);
+  font-weight: 700;
+  margin-bottom: .3rem;
+}
+
+.journey-tracker {
+  position: fixed;
+  left: 1.8rem;
+  bottom: 1.8rem;
+  z-index: 250;
+  display: flex;
+  align-items: center;
+  gap: .55rem;
+  background: rgba(19, 21, 23, .85);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--c-border);
+  border-radius: 999px;
+  padding: .55rem 1.1rem;
+  font-size: .76rem;
+  letter-spacing: .04em;
+  opacity: 0;
+  transform: translateY(8px);
+  pointer-events: none;
+  transition: opacity .35s var(--ease-out), transform .35s var(--ease-out);
+}
+.journey-tracker.is-visible { opacity: 1; transform: translateY(0); }
+.journey-tracker__num {
+  font-weight: 800;
+  color: var(--c-yellow);
+}
+.journey-tracker__label {
+  color: var(--c-gray-light);
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: .7rem;
+}
+.journey-tracker__total {
+  color: var(--c-gray);
+  font-size: .7rem;
+}
+
+/* ============================================================
+   Pull-quote band (Business Model closing statement)
+   ============================================================ */
+.pull-quote {
+  text-align: center;
+  padding: clamp(3rem, 7vw, 5rem) clamp(1.5rem, 5vw, 4rem);
+}
+.pull-quote__text {
+  font-size: clamp(1.4rem, 3.2vw, 2.2rem);
+  font-weight: 700;
+  line-height: 1.4;
+  color: var(--c-white);
+  max-width: 900px;
+  margin: 0 auto;
+}
+.pull-quote__text .accent-text {
+  background: linear-gradient(100deg, var(--c-yellow) 10%, var(--c-orange) 90%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* ============================================================
    Responsive
    ============================================================ */
 @media (max-width: 980px) {
@@ -900,8 +1087,24 @@ footer nav a:hover { color: var(--c-yellow); }
 }
 
 @media (max-width: 640px) {
-  .nav__links { gap: 1rem; font-size: .68rem; }
+  .nav {
+    padding-left: 1.1rem;
+    padding-right: 1.1rem;
+  }
+  .nav__links {
+    gap: .85rem;
+    font-size: .62rem;
+    overflow-x: auto;
+    max-width: 62vw;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .nav__links::-webkit-scrollbar { display: none; }
   .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
   .cta-band { flex-direction: column; align-items: flex-start; }
   footer { flex-direction: column; align-items: flex-start; }
+  .journey { padding-left: 56px; }
+  .journey__badge { left: -56px; width: 46px; height: 46px; font-size: .8rem; }
+  .journey__line { left: 22px; }
+  .journey-tracker { display: none; }
 }
