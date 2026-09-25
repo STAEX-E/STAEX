@@ -1,5 +1,5 @@
 /* ============================================================
-   STAEX — Core interactions: nav state, scroll progress, reveals
+   Sentinel Dynamics — Core interactions: nav state, scroll progress, reveals
    ============================================================ */
 
 (function () {
