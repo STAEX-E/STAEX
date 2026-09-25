@@ -1015,6 +1015,26 @@ footer nav a:hover { color: var(--c-yellow); }
   margin-bottom: .3rem;
 }
 
+.journey__meta {
+  display: inline-flex;
+  align-items: baseline;
+  gap: .4rem;
+  margin-top: .9rem;
+  padding-top: .9rem;
+  border-top: 1px solid var(--c-border);
+  font-size: .82rem;
+  max-width: 560px;
+}
+.journey__meta strong {
+  color: var(--c-yellow);
+  font-size: .68rem;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  font-weight: 700;
+  white-space: nowrap;
+}
+.journey__meta span { color: var(--c-gray-light); }
+
 .journey-tracker {
   position: fixed;
   left: 1.8rem;
