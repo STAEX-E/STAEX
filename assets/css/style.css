@@ -1812,6 +1812,146 @@ footer nav a:hover { color: var(--c-yellow); }
 .compare-remove:hover { border-color: var(--c-orange); color: var(--c-orange); }
 
 /* ============================================================
+   Gallery
+   ============================================================ */
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1.1rem;
+}
+.gallery-tile {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--c-border);
+  overflow: hidden;
+  cursor: pointer;
+  background: var(--c-bg-soft);
+}
+.gallery-tile__bg {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform .5s var(--ease-out);
+}
+.gallery-tile__bg svg { width: 34%; height: 34%; color: var(--c-yellow); opacity: .8; }
+.gallery-tile:hover .gallery-tile__bg { transform: scale(1.08); }
+.gallery-tile__overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 1rem;
+  background: linear-gradient(to top, rgba(0,0,0,.75), transparent 60%);
+  opacity: 0;
+  transition: opacity .35s var(--ease-out);
+}
+.gallery-tile:hover .gallery-tile__overlay { opacity: 1; }
+.gallery-tile__cat {
+  font-size: .6rem;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--c-yellow);
+  font-weight: 800;
+  margin-bottom: .2rem;
+}
+.gallery-tile__title { font-size: .88rem; font-weight: 700; color: var(--c-white); }
+
+.gallery-lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 900;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  background: rgba(5,6,7,.94);
+  backdrop-filter: blur(6px);
+}
+.gallery-lightbox.is-open { display: flex; }
+.gallery-lightbox__stage {
+  width: min(70vw, 640px);
+  aspect-ratio: 4 / 3;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--c-border);
+  background: var(--c-bg-soft);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.gallery-lightbox__stage svg { width: 30%; height: 30%; color: var(--c-yellow); }
+.gallery-lightbox__caption {
+  position: absolute;
+  bottom: 8%;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  color: var(--c-gray-light);
+  font-size: .9rem;
+}
+.gallery-lightbox__close {
+  position: absolute;
+  top: 1.6rem;
+  right: 1.6rem;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: 1px solid var(--c-border);
+  background: var(--c-panel-2);
+  color: var(--c-white);
+  font-size: 1rem;
+  cursor: pointer;
+}
+.gallery-lightbox__nav {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 1px solid var(--c-border);
+  background: var(--c-panel-2);
+  color: var(--c-white);
+  font-size: 1.6rem;
+  cursor: pointer;
+  margin: 0 1.4rem;
+  flex-shrink: 0;
+}
+.gallery-lightbox__nav:hover, .gallery-lightbox__close:hover { border-color: var(--c-yellow-dim); color: var(--c-yellow); }
+
+/* ============================================================
+   FAQ accordion
+   ============================================================ */
+.faq-item {
+  border-bottom: 1px solid var(--c-border);
+}
+.faq-item:first-child { border-top: 1px solid var(--c-border); }
+.faq-item__q {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.3rem 0;
+  background: none;
+  border: none;
+  color: var(--c-white);
+  font-size: 1rem;
+  font-weight: 700;
+  text-align: left;
+  cursor: pointer;
+  font-family: inherit;
+}
+.faq-item__q .chev { transition: transform .3s var(--ease-out); color: var(--c-gray-light); flex-shrink: 0; }
+.faq-item.is-open .faq-item__q .chev { transform: rotate(180deg); color: var(--c-yellow); }
+.faq-item__a {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height .35s var(--ease-out);
+}
+.faq-item__a p { padding-bottom: 1.3rem; margin: 0; max-width: 640px; }
+.faq-item.is-open .faq-item__a { max-height: 240px; }
+
+/* ============================================================
    Responsive
    ============================================================ */
 @media (max-width: 980px) {
@@ -1828,6 +1968,9 @@ footer nav a:hover { color: var(--c-yellow); }
   .cart-item { grid-template-columns: 1fr; text-align: center; }
   .cart-item__visual { margin: 0 auto; }
   .cart-item__actions { align-items: center; }
+  .gallery-lightbox__stage { width: 78vw; }
+  .gallery-lightbox__nav { width: 38px; height: 38px; margin: 0 .5rem; font-size: 1.3rem; }
+  .gallery-lightbox__close { top: 1rem; right: 1rem; width: 36px; height: 36px; }
 }
 
 @media (max-width: 640px) {
