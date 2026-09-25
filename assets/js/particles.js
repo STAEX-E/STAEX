@@ -120,36 +120,53 @@
     if (reduceMotion) tick(0);
   }
 
-  /* ---------------- Hero aircraft-assembly field ---------------- */
+  /* ---------------- Hero drone-assembly field ---------------- */
+  // A different drone silhouette forms on every page load; the pick is made
+  // once per load and reused across resizes so it stays stable in-session.
+  const DRONE_VARIANTS = ["quad", "hexa", "fpv", "octo"];
+  const heroVariant = DRONE_VARIANTS[Math.floor(Math.random() * DRONE_VARIANTS.length)];
+  const DRONE_ARM_DEFS = {
+    quad: { count: 4, angleOffset: Math.PI / 4, armLen: 0.4, armW: 0.05, podR: 0.095, bodyR: 0.11 },
+    hexa: { count: 6, angleOffset: 0, armLen: 0.4, armW: 0.045, podR: 0.078, bodyR: 0.12 },
+    fpv: { count: 4, angleOffset: Math.PI / 4, armLen: 0.27, armW: 0.06, podR: 0.08, bodyR: 0.1 },
+    octo: { count: 8, angleOffset: Math.PI / 8, armLen: 0.4, armW: 0.04, podR: 0.062, bodyR: 0.13 },
+  };
+
+  function drawDroneShape(octx, cx, cy, s, variant) {
+    const def = DRONE_ARM_DEFS[variant] || DRONE_ARM_DEFS.quad;
+    octx.fillStyle = "#fff";
+
+    octx.beginPath();
+    octx.arc(cx, cy, def.bodyR * s, 0, Math.PI * 2);
+    octx.fill();
+
+    for (let i = 0; i < def.count; i++) {
+      const angle = def.angleOffset + (i / def.count) * Math.PI * 2;
+      octx.save();
+      octx.translate(cx, cy);
+      octx.rotate(angle);
+      octx.fillRect(0, (-def.armW * s) / 2, def.armLen * s, def.armW * s);
+      octx.restore();
+
+      const ex = cx + Math.cos(angle) * def.armLen * s;
+      const ey = cy + Math.sin(angle) * def.armLen * s;
+      octx.beginPath();
+      octx.arc(ex, ey, def.podR * s, 0, Math.PI * 2);
+      octx.fill();
+    }
+  }
+
   function buildAircraftPoints(width, height, count) {
     const off = document.createElement("canvas");
     off.width = width;
     off.height = height;
     const octx = off.getContext("2d");
-    octx.fillStyle = "#fff";
 
     const s = Math.min(width, height) * 0.86;
     const cx = width / 2;
     const cy = height / 2;
 
-    // Stylized top-down aircraft / interceptor silhouette (normalized -0.5..0.5)
-    const shape = [
-      [0, -0.5], [0.045, -0.28], [0.05, -0.05],
-      [0.52, 0.1], [0.52, 0.17], [0.07, 0.08],
-      [0.09, 0.27], [0.24, 0.4], [0.24, 0.46],
-      [0.05, 0.37], [0.04, 0.5], [-0.04, 0.5],
-      [-0.05, 0.37], [-0.24, 0.46], [-0.24, 0.4],
-      [-0.09, 0.27], [-0.07, 0.08], [-0.52, 0.17],
-      [-0.52, 0.1], [-0.05, -0.05], [-0.045, -0.28],
-    ];
-
-    octx.beginPath();
-    octx.moveTo(cx + shape[0][0] * s, cy + shape[0][1] * s);
-    for (let i = 1; i < shape.length; i++) {
-      octx.lineTo(cx + shape[i][0] * s, cy + shape[i][1] * s);
-    }
-    octx.closePath();
-    octx.fill();
+    drawDroneShape(octx, cx, cy, s, heroVariant);
 
     const data = octx.getImageData(0, 0, width, height).data;
     const candidates = [];

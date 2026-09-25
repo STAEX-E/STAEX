@@ -241,6 +241,14 @@ img, svg { display: block; max-width: 100%; }
 }
 .nav__icon-btn svg { width: 17px; height: 17px; }
 .nav__icon-btn:hover { color: var(--c-yellow); background: var(--c-panel-2); }
+.nav__icon-btn--labeled { width: auto; padding: 0 .7rem 0 .55rem; gap: .4rem; }
+.nav__icon-btn__label {
+  font-size: .72rem;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
 
 .cart-badge {
   position: absolute;
@@ -2071,6 +2079,8 @@ footer nav a:hover { color: var(--c-yellow); }
   }
   .nav__icon-btn { width: 28px; height: 28px; }
   .nav__icon-btn svg { width: 15px; height: 15px; }
+  .nav__icon-btn--labeled { width: auto; }
+  .nav__icon-btn__label { display: none; }
   .nav__links::-webkit-scrollbar { display: none; }
   .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
   .cta-band { flex-direction: column; align-items: flex-start; }
